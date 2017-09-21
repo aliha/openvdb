@@ -31,6 +31,8 @@
 /// @file pyGrid.h
 /// @author Peter Cucka
 /// @brief Boost.Python wrapper for openvdb::Grid
+#undef max
+#undef min
 
 #ifndef OPENVDB_PYGRID_HAS_BEEN_INCLUDED
 #define OPENVDB_PYGRID_HAS_BEEN_INCLUDED
@@ -458,7 +460,7 @@ evalLeafBoundingBox(const GridType& grid)
 {
     CoordBBox bbox;
     grid.tree().evalLeafBoundingBox(bbox);
-    return py::make_tuple(bbox.min(), bbox.max());
+    return py::make_tuple((bbox.min)(), (bbox.max)());
 }
 
 
@@ -477,7 +479,7 @@ inline py::tuple
 evalActiveVoxelBoundingBox(const GridType& grid)
 {
     CoordBBox bbox = grid.evalActiveVoxelBoundingBox();
-    return py::make_tuple(bbox.min(), bbox.max());
+    return py::make_tuple((bbox.min)(), (bbox.max)());
 }
 
 
@@ -543,7 +545,7 @@ getIndexRange(const GridType& grid)
 {
     CoordBBox bbox;
     grid.tree().getIndexRange(bbox);
-    return py::make_tuple(bbox.min(), bbox.max());
+    return py::make_tuple((bbox.min)(), (bbox.max)());
 }
 
 
@@ -1619,8 +1621,8 @@ public:
     ValueT getValue() const { return *mIter; }
     bool getActive() const { return mIter.isValueOn(); }
     Index getDepth() const { return mIter.getDepth(); }
-    Coord getBBoxMin() const { return mIter.getBoundingBox().min(); }
-    Coord getBBoxMax() const { return mIter.getBoundingBox().max(); }
+    Coord getBBoxMin() const { return (mIter.getBoundingBox().min)(); }
+    Coord getBBoxMax() const { return (mIter.getBoundingBox().max)(); }
     Index64 getVoxelCount() const { return mIter.getVoxelCount(); }
 
     void setValue(const ValueT& val) { SetterT::setValue(mIter, val); }

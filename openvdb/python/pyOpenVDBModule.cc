@@ -302,7 +302,9 @@ struct MetaMapConverter
                 value.reset(
                     new StringMetadata(py::extract<std::string>(val)));
             } else if (PyLong_Check(val.ptr())
+#undef max
                 && PyLong_AsLong(val.ptr()) <= std::numeric_limits<Int32>::max()
+#undef min
                 && PyLong_AsLong(val.ptr()) >= std::numeric_limits<Int32>::min())
             {
                 value.reset(new Int32Metadata(py::extract<Int32>(val)));
