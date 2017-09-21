@@ -47,7 +47,7 @@ exportFloatGrid()
 
     // Specify that py::numeric::array should refer to the Python type numpy.ndarray
     // (rather than the older Numeric.array).
-    py::numeric::array::set_module_and_type("numpy", "ndarray");
+    //py::numeric::array::set_module_and_type("numpy", "ndarray");
 
     pyGrid::exportGrid<FloatGrid>();
 #ifdef PY_OPENVDB_WRAP_ALL_GRID_TYPES
